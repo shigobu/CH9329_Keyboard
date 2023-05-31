@@ -31,15 +31,9 @@ jobs:
 
       matrix:
         board:
-          - fqbn: arduino:avr:leonardo
+          - fqbn: arduino:avr:uno
             platforms: |
               - name: arduino:avr
-          - fqbn: arduino:sam:arduino_due_x_dbg
-            platforms: |
-              - name: arduino:sam
-          - fqbn: arduino:samd:mkrzero
-            platforms: |
-              - name: arduino:samd
 
     steps:
       - name: Checkout repository

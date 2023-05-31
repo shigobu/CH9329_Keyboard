@@ -1,3 +1,6 @@
+制作中。まだ使えません。
+In production. Not available yet.
+
 :repository-owner: shigobu
 :repository-name: CH9329_Keyboard
 

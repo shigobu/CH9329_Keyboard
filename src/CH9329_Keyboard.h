@@ -139,6 +139,6 @@ public:
   size_t release(uint8_t k);
   void releaseAll(void);
 };
-extern CH9329_Keyboard_ CH9329_Keyboards;
+extern CH9329_Keyboard_ CH9329_Keyboard;
 
 #endif

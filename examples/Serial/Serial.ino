@@ -19,13 +19,13 @@
   https://www.arduino.cc/en/Tutorial/BuiltInExamples/KeyboardSerial
 */
 
-#include "Keyboard.h"
+#include "CH9329_Keyboard.h"
 
 void setup() {
   // open the serial port:
   Serial.begin(9600);
   // initialize control over the keyboard:
-  Keyboard.begin();
+  CH9329_Keyboard.begin();
 }
 
 void loop() {
@@ -34,6 +34,6 @@ void loop() {
     // read incoming serial data:
     char inChar = Serial.read();
     // Type the next ASCII value from what you received:
-    Keyboard.write(inChar + 1);
+    CH9329_Keyboard.write(inChar + 1);
   }
 }

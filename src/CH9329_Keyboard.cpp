@@ -186,5 +186,3 @@ size_t CH9329_Keyboard_::write(const uint8_t *buffer, size_t size) {
 }
 
 CH9329_Keyboard_ CH9329_Keyboard;
-
-#endif

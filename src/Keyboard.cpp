@@ -22,73 +22,49 @@
 #include "Keyboard.h"
 #include "KeyboardLayout.h"
 
-#if defined(_USING_HID)
-
 //================================================================================
 //================================================================================
 //  Keyboard
 
-static const uint8_t _hidReportDescriptor[] PROGMEM = {
-
-    //  Keyboard
-    0x05, 0x01,                    // USAGE_PAGE (Generic Desktop)  // 47
-    0x09, 0x06,                    // USAGE (Keyboard)
-    0xa1, 0x01,                    // COLLECTION (Application)
-    0x85, 0x02,                    //   REPORT_ID (2)
-    0x05, 0x07,                    //   USAGE_PAGE (Keyboard)
-
-    0x19, 0xe0,                    //   USAGE_MINIMUM (Keyboard LeftControl)
-    0x29, 0xe7,                    //   USAGE_MAXIMUM (Keyboard Right GUI)
-    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
-    0x25, 0x01,                    //   LOGICAL_MAXIMUM (1)
-    0x75, 0x01,                    //   REPORT_SIZE (1)
-
-    0x95, 0x08,                    //   REPORT_COUNT (8)
-    0x81, 0x02,                    //   INPUT (Data,Var,Abs)
-    0x95, 0x01,                    //   REPORT_COUNT (1)
-    0x75, 0x08,                    //   REPORT_SIZE (8)
-    0x81, 0x03,                    //   INPUT (Cnst,Var,Abs)
-
-    0x95, 0x06,                    //   REPORT_COUNT (6)
-    0x75, 0x08,                    //   REPORT_SIZE (8)
-    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
-    0x25, 0x73,                    //   LOGICAL_MAXIMUM (115)
-    0x05, 0x07,                    //   USAGE_PAGE (Keyboard)
-
-    0x19, 0x00,                    //   USAGE_MINIMUM (Reserved (no event indicated))
-    0x29, 0x73,                    //   USAGE_MAXIMUM (Keyboard Application)
-    0x81, 0x00,                    //   INPUT (Data,Ary,Abs)
-    0xc0,                          // END_COLLECTION
-};
-
-Keyboard_::Keyboard_(void)
+CH9329_Keyboard_::CH9329_Keyboard_(void)
 {
-	static HIDSubDescriptor node(_hidReportDescriptor, sizeof(_hidReportDescriptor));
-	HID().AppendDescriptor(&node);
 	_asciimap = KeyboardLayout_en_US;
 }
 
-void Keyboard_::begin(const uint8_t *layout)
+void CH9329_Keyboard_::begin(const uint8_t *layout, Stream* stream)
 {
 	_asciimap = layout;
+	_stream = stream;
 }
 
-void Keyboard_::end(void)
+void CH9329_Keyboard_::end(void)
 {
 }
 
-void Keyboard_::sendReport(KeyReport* keys)
+void CH9329_Keyboard_::sendReport(KeyReport* keys)
 {
-	HID().SendReport(2,keys,sizeof(KeyReport));
+	uint8_t data[14] = {0x57, 0xAB, 0x00, 0x02, 0x08};
+	data[5] = keys->modifiers;
+	data[6] = 0;
+	data[7] = keys->keys[0];
+	data[8] = keys->keys[1];
+	data[9] = keys->keys[2];
+	data[10] = keys->keys[3];
+	data[11] = keys->keys[4];
+	data[12] = keys->keys[5];
+	for (size_t i = 0; i < 13; i++)
+	{
+		data[13] += data[i];
+	}
+	
+	_stream->write(data, 14);
 }
-
-uint8_t USBPutChar(uint8_t c);
 
 // press() adds the specified key (printing, non-printing, or modifier)
 // to the persistent key report and sends the report.  Because of the way
 // USB HID works, the host acts like the key remains pressed until we
 // call release(), releaseAll(), or otherwise clear the report and resend.
-size_t Keyboard_::press(uint8_t k)
+size_t CH9329_Keyboard_::press(uint8_t k)
 {
 	uint8_t i;
 	if (k >= 136) {			// it's a non-printing key (not a modifier)
@@ -138,7 +114,7 @@ size_t Keyboard_::press(uint8_t k)
 // release() takes the specified key out of the persistent key report and
 // sends the report.  This tells the OS the key is no longer pressed and that
 // it shouldn't be repeated any more.
-size_t Keyboard_::release(uint8_t k)
+size_t CH9329_Keyboard_::release(uint8_t k)
 {
 	uint8_t i;
 	if (k >= 136) {			// it's a non-printing key (not a modifier)
@@ -175,7 +151,7 @@ size_t Keyboard_::release(uint8_t k)
 	return 1;
 }
 
-void Keyboard_::releaseAll(void)
+void CH9329_Keyboard_::releaseAll(void)
 {
 	_keyReport.keys[0] = 0;
 	_keyReport.keys[1] = 0;
@@ -187,14 +163,14 @@ void Keyboard_::releaseAll(void)
 	sendReport(&_keyReport);
 }
 
-size_t Keyboard_::write(uint8_t c)
+size_t CH9329_Keyboard_::write(uint8_t c)
 {
 	uint8_t p = press(c);	// Keydown
 	release(c);		// Keyup
 	return p;		// just return the result of press() since release() almost always returns 1
 }
 
-size_t Keyboard_::write(const uint8_t *buffer, size_t size) {
+size_t CH9329_Keyboard_::write(const uint8_t *buffer, size_t size) {
 	size_t n = 0;
 	while (size--) {
 		if (*buffer != '\r') {
@@ -209,6 +185,6 @@ size_t Keyboard_::write(const uint8_t *buffer, size_t size) {
 	return n;
 }
 
-Keyboard_ Keyboard;
+CH9329_Keyboard_ CH9329_Keyboard;
 
 #endif

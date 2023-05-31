@@ -19,16 +19,10 @@
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef KEYBOARD_h
-#define KEYBOARD_h
+#ifndef CH9329_KEYBOARD_h
+#define CH9329_KEYBOARD_h
 
-#include "HID.h"
-
-#if !defined(_USING_HID)
-
-#warning "Using legacy HID core (non pluggable)"
-
-#else
+#include <Stream.h>
 
 //================================================================================
 //================================================================================
@@ -128,15 +122,16 @@ typedef struct
   uint8_t keys[6];
 } KeyReport;
 
-class Keyboard_ : public Print
+class CH9329_Keyboard_ : public Print
 {
 private:
   KeyReport _keyReport;
   const uint8_t *_asciimap;
+  Stream* _stream;
   void sendReport(KeyReport* keys);
 public:
-  Keyboard_(void);
-  void begin(const uint8_t *layout = KeyboardLayout_en_US);
+  CH9329_Keyboard_(void);
+  void begin(const uint8_t *layout = KeyboardLayout_en_US, Stream* stream = &Serial);
   void end(void);
   size_t write(uint8_t k);
   size_t write(const uint8_t *buffer, size_t size);
@@ -144,7 +139,6 @@ public:
   size_t release(uint8_t k);
   void releaseAll(void);
 };
-extern Keyboard_ Keyboard;
+extern CH9329_Keyboard_ CH9329_Keyboards;
 
-#endif
 #endif

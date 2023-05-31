@@ -1,5 +1,5 @@
-:repository-owner: arduino-libraries
-:repository-name: Keyboard
+:repository-owner: shigobu
+:repository-name: CH9329_Keyboard
 
 = {repository-name} Library for Arduino =
 

@@ -31,10 +31,17 @@ CH9329_Keyboard_::CH9329_Keyboard_(void)
 	_asciimap = KeyboardLayout_en_US;
 }
 
-void CH9329_Keyboard_::begin(const uint8_t *layout, Stream* stream)
+void CH9329_Keyboard_::begin(Stream& stream, const uint8_t *layout)
 {
 	_asciimap = layout;
 	_stream = stream;
+}
+
+void CH9329_Keyboard_::begin(HardwareSerial& serial, const uint8_t *layout)
+{
+	_asciimap = layout;
+	serial.begin(9600);
+	_stream = serial;
 }
 
 void CH9329_Keyboard_::end(void)
@@ -57,7 +64,7 @@ void CH9329_Keyboard_::sendReport(KeyReport* keys)
 		data[13] += data[i];
 	}
 	
-	_stream->write(data, 14);
+	_stream.write(data, 14);
 }
 
 // press() adds the specified key (printing, non-printing, or modifier)

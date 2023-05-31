@@ -127,11 +127,12 @@ class CH9329_Keyboard_ : public Print
 private:
   KeyReport _keyReport;
   const uint8_t *_asciimap;
-  Stream* _stream;
+  Stream& _stream;
   void sendReport(KeyReport* keys);
 public:
   CH9329_Keyboard_(void);
-  void begin(const uint8_t *layout = KeyboardLayout_en_US, Stream* stream = &Serial);
+  void begin(Stream& stream, const uint8_t *layout = KeyboardLayout_en_US);
+  void begin(HardwareSerial& serial = Serial, const uint8_t *layout = KeyboardLayout_en_US);
   void end(void);
   size_t write(uint8_t k);
   size_t write(const uint8_t *buffer, size_t size);

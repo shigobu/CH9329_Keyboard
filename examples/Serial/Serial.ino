@@ -20,12 +20,23 @@
 */
 
 #include "CH9329_Keyboard.h"
+#include <SoftwareSerial.h>
+
+const byte rxPin = 2;
+const byte txPin = 3;
+SoftwareSerial mySerial (rxPin, txPin);
 
 void setup() {
-  // open the serial port:
-  Serial.begin(9600);
   // initialize control over the keyboard:
   CH9329_Keyboard.begin();
+  /* 
+  // or
+  CH9329_Keyboard.begin(Serial);
+  
+  // If you use SoftwareSerial, you need to call the begin function.
+  mySerial.begin(9600);
+  CH9329_Keyboard.begin(mySerial);
+  */
 }
 
 void loop() {

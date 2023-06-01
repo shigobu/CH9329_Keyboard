@@ -28,12 +28,10 @@ SoftwareSerial mySerial (rxPin, txPin);
 
 void setup() {
   // initialize control over the keyboard:
-  CH9329_Keyboard.begin();
+  Serial.begin(9600);
+  CH9329_Keyboard.begin(Serial);
   /* 
   // or
-  CH9329_Keyboard.begin(Serial);
-  
-  // If you use SoftwareSerial, you need to call the begin function.
   mySerial.begin(9600);
   CH9329_Keyboard.begin(mySerial);
   */

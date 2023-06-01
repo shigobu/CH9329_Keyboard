@@ -126,6 +126,9 @@ typedef struct
 } KeyReport;
 
 class CH9329_Keyboard_
+#ifdef CH9329_PRINT_SUPPORT
+ : public Print
+#endif
 {
 private:
   KeyReport _keyReport;

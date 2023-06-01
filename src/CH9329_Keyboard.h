@@ -104,6 +104,9 @@
 #define KEY_F23           0xFA
 #define KEY_F24           0xFB
 
+//baud rate
+#define CH9329_DEFAULT_BAUDRATE   9600
+
 // Supported keyboard layouts
 extern const uint8_t KeyboardLayout_de_DE[];
 extern const uint8_t KeyboardLayout_en_US[];

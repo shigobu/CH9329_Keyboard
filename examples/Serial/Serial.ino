@@ -20,9 +20,9 @@
 */
 
 #include "CH9329_Keyboard.h"
-//#include <SoftwareSerial.h>
 
-/*
+/* SoftwareSerial can also be used.
+#include <SoftwareSerial.h>
 const byte rxPin = 2;
 const byte txPin = 3;
 SoftwareSerial mySerial (rxPin, txPin);
@@ -30,10 +30,9 @@ SoftwareSerial mySerial (rxPin, txPin);
 
 void setup() {
   // initialize control over the keyboard:
-  Serial.begin(9600);
+  Serial.begin(CH9329_DEFAULT_BAUDRATE);
   CH9329_Keyboard.begin(Serial);
-  /* 
-  // or
+  /* or
   mySerial.begin(9600);
   CH9329_Keyboard.begin(mySerial);
   */

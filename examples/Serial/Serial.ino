@@ -20,11 +20,13 @@
 */
 
 #include "CH9329_Keyboard.h"
-#include <SoftwareSerial.h>
+//#include <SoftwareSerial.h>
 
+/*
 const byte rxPin = 2;
 const byte txPin = 3;
 SoftwareSerial mySerial (rxPin, txPin);
+*/
 
 void setup() {
   // initialize control over the keyboard:

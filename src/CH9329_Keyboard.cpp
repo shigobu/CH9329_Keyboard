@@ -37,13 +37,6 @@ void CH9329_Keyboard_::begin(Stream& stream, const uint8_t *layout)
 	_stream = stream;
 }
 
-void CH9329_Keyboard_::begin(HardwareSerial& serial, const uint8_t *layout)
-{
-	_asciimap = layout;
-	serial.begin(9600);
-	_stream = serial;
-}
-
 void CH9329_Keyboard_::end(void)
 {
 }

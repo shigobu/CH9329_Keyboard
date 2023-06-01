@@ -75,7 +75,6 @@ size_t CH9329_Keyboard_::press(uint8_t k)
 	} else {				// it's a printing key
 		k = pgm_read_byte(_asciimap + k);
 		if (!k) {
-			setWriteError();
 			return 0;
 		}
 		if ((k & ALT_GR) == ALT_GR) {
@@ -103,7 +102,6 @@ size_t CH9329_Keyboard_::press(uint8_t k)
 			}
 		}
 		if (i == 6) {
-			setWriteError();
 			return 0;
 		}
 	}

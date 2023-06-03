@@ -34,7 +34,7 @@ CH9329_Keyboard_::CH9329_Keyboard_(void)
 void CH9329_Keyboard_::begin(Stream& stream, const uint8_t *layout)
 {
 	_asciimap = layout;
-	_stream = stream;
+	_stream = &stream;
 }
 
 void CH9329_Keyboard_::end(void)
@@ -52,12 +52,14 @@ void CH9329_Keyboard_::sendReport(KeyReport* keys)
 	data[10] = keys->keys[3];
 	data[11] = keys->keys[4];
 	data[12] = keys->keys[5];
+	int sum = 0;
 	for (size_t i = 0; i < 13; i++)
 	{
-		data[13] += data[i];
+		sum += data[i];
 	}
+	data[13] = (uint8_t)(sum & 0xff);
 	
-	_stream.write(data, 14);
+	_stream->write(data, 14);
 }
 
 // press() adds the specified key (printing, non-printing, or modifier)

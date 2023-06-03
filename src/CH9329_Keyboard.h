@@ -125,15 +125,12 @@ typedef struct
   uint8_t keys[6];
 } KeyReport;
 
-class CH9329_Keyboard_
-#ifdef CH9329_PRINT_SUPPORT
- : public Print
-#endif
+class CH9329_Keyboard_ : public Print
 {
 private:
   KeyReport _keyReport;
   const uint8_t *_asciimap;
-  Stream& _stream;
+  Stream* _stream;
   void sendReport(KeyReport* keys);
 public:
   CH9329_Keyboard_(void);

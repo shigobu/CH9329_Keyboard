@@ -21,14 +21,6 @@
 #ifndef KEYBOARD_SV_SE_h
 #define KEYBOARD_SV_SE_h
 
-#include "HID.h"
-
-#if !defined(_USING_HID)
-
-#warning "Using legacy HID core (non pluggable)"
-
-#else
-
 //================================================================================
 //================================================================================
 //  Keyboard
@@ -40,5 +32,4 @@
 #define KEY_UMLAUT        (136+0x30)
 #define KEY_ACUTE_ACC     (136+0x2e)
 
-#endif
 #endif

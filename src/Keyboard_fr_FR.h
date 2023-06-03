@@ -21,14 +21,6 @@
 #ifndef KEYBOARD_FR_FR_h
 #define KEYBOARD_FR_FR_h
 
-#include "HID.h"
-
-#if !defined(_USING_HID)
-
-#warning "Using legacy HID core (non pluggable)"
-
-#else
-
 //================================================================================
 //================================================================================
 //  Keyboard
@@ -42,5 +34,4 @@
 #define KEY_CIRCUMFLEX      (136+0x2f)
 #define KEY_U_GRAVE         (136+0x34)
 
-#endif
 #endif

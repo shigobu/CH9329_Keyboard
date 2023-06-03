@@ -21,14 +21,6 @@
 #ifndef KEYBOARD_IT_IT_h
 #define KEYBOARD_IT_IT_h
 
-#include "HID.h"
-
-#if !defined(_USING_HID)
-
-#warning "Using legacy HID core (non pluggable)"
-
-#else
-
 //================================================================================
 //================================================================================
 //  Keyboard
@@ -40,5 +32,4 @@
 #define KEY_A_GRAVE       (136+0x34)
 #define KEY_U_GRAVE       (136+0x31)
 
-#endif
 #endif

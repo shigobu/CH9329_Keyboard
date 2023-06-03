@@ -21,14 +21,6 @@
 #ifndef KEYBOARD_PT_PT_h
 #define KEYBOARD_PT_PT_h
 
-#include "HID.h"
-
-#if !defined(_USING_HID)
-
-#warning "Using legacy HID core (non pluggable)"
-
-#else
-
 //================================================================================
 //================================================================================
 //  Keyboard
@@ -40,5 +32,4 @@
 #define KEY_MASCULINE_ORDINAL    (136+0x34)
 #define KEY_TILDE                (136+0x31)
 
-#endif
 #endif

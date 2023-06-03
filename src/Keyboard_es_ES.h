@@ -21,14 +21,6 @@
 #ifndef KEYBOARD_ES_ES_h
 #define KEYBOARD_ES_ES_h
 
-#include "HID.h"
-
-#if !defined(_USING_HID)
-
-#warning "Using legacy HID core (non pluggable)"
-
-#else
-
 //================================================================================
 //================================================================================
 //  Keyboard
@@ -41,5 +33,4 @@
 #define KEY_ACUTE                (136+0x34)
 #define KEY_C_CEDILLA            (136+0x31)
 
-#endif
 #endif

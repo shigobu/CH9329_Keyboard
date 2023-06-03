@@ -21,14 +21,6 @@
 #ifndef KEYBOARD_DE_DE_h
 #define KEYBOARD_DE_DE_h
 
-#include "HID.h"
-
-#if !defined(_USING_HID)
-
-#warning "Using legacy HID core (non pluggable)"
-
-#else
-
 //================================================================================
 //================================================================================
 //  Keyboard
@@ -41,5 +33,4 @@
 #define KEY_O_UMLAUT      (136+0x33)
 #define KEY_A_UMLAUT      (136+0x34)
 
-#endif
 #endif

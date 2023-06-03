@@ -1,7 +1,6 @@
 /* Released into the public domain */
 /* Earle F. Philhower, III <earlephilhower@yahoo.com> */
 
-#define CH9329_PRINT_SUPPORT
 #include "CH9329_Keyboard.h"
 
 const int button = 2;

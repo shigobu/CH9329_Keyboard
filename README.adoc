@@ -1,6 +1,3 @@
-制作中。まだ使えません。
-In production. Not available yet.
-
 :repository-owner: shigobu
 :repository-name: CH9329_Keyboard
 
@@ -13,6 +10,31 @@ image:https://github.com/{repository-owner}/{repository-name}/actions/workflows/
 This library and the CH9329 chip allows an Arduino board without USB capability to act as a keyboard.
 
 For more information about the original Keyboard library please visit
+https://www.arduino.cc/reference/en/language/functions/usb/keyboard/
+
+== 使い方　Usage ==
+....
+Serial.begin(CH9329_DEFAULT_BAUDRATE);
+CH9329_Keyboard.begin(Serial);
+....
+
+SoftwareSerialも使えます。 +
+SoftwareSerial can also be used.
+
+....
+#include <SoftwareSerial.h>
+const byte rxPin = 2;
+const byte txPin = 3;
+SoftwareSerial mySerial (rxPin, txPin);
+
+void setup() {
+  mySerial.begin(CH9329_DEFAULT_BAUDRATE);
+  CH9329_Keyboard.begin(mySerial);
+}
+....
+
+他、オリジナルのキーボードライブラリとほとんど同じです。 +
+For more information about the original Keyboard library please visit +
 https://www.arduino.cc/reference/en/language/functions/usb/keyboard/
 
 == License ==

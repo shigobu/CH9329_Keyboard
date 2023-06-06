@@ -12,7 +12,7 @@ This library and the CH9329 chip allows an Arduino board without USB capability 
 For more information about the original Keyboard library please visit
 https://www.arduino.cc/reference/en/language/functions/usb/keyboard/
 
-== 使い方　Usage ==
+== Usage ==
 ....
 Serial.begin(CH9329_DEFAULT_BAUDRATE);
 CH9329_Keyboard.begin(Serial);
@@ -36,6 +36,19 @@ void setup() {
 他、オリジナルのキーボードライブラリとほとんど同じです。 +
 For more information about the original Keyboard library please visit
 https://www.arduino.cc/reference/en/language/functions/usb/keyboard/
+
+== Installation ==
+. 最新の https://github.com/shigobu/CH9329_Keyboard/releases[Releases] で「Source code(zip)」をクリックして、ソースコードをダウンロードする。
+. Arduino IDE を起動する。
+. 「スケッチ」→「ライブラリをインクルード」→「.ZIP形式のライブラリをインストール...」を選択する。
+. ダウンロードしたzipファイルを選択し「開く」を押す。
+
+'''
+
+. Download the source code by clicking on "Source code(zip)" in the latest https://github.com/shigobu/CH9329_Keyboard/releases[Releases].
+. Start the Arduino IDE.
+. Select "Sketch" -> "Include Library" -> "Add .ZIP Library...".
+. Select the downloaded zip file and click "Open".
 
 == ATtiny202 (or MCU with small flash) support ==
 ATtiny202のようなフラッシュサイズが2KB以下のマイコンでは、print関数を無効化することでフラッシュ使用量を削減しています。

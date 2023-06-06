@@ -37,6 +37,17 @@ void setup() {
 For more information about the original Keyboard library please visit
 https://www.arduino.cc/reference/en/language/functions/usb/keyboard/
 
+== ATtiny202 (or MCU with small flash) support ==
+ATtiny202のようなフラッシュサイズが2KB以下のマイコンでは、print関数を無効化することでフラッシュ使用量を削減しています。
+これは、`FLASHEND`マクロ使用して自動で判定されます。
+
+*前述の通り、フラッシュサイズが2KB以下の場合は、print関数が使用出来ません。*
+
+For microcontrollers with a flash size of 2KB or less, such as the ATtiny202, the flash usage is reduced by disabling the print function.
+This is automatically determined by using the `FLASHEND` macro.
+
+*As mentioned above, if the flash size is less than 2KB, the print function cannot be used. *
+
 == Acknowledgements ==
 いちかわ(ICHI) https://twitter.com/atsuyuki1kawa[(Twitter)] さんが公開している  https://sites.google.com/site/ichiworkspace/%E3%83%9B%E3%83%BC%E3%83%A0/%E3%81%BF%E3%82%93%E3%81%AA%E3%81%AE%E3%83%A9%E3%83%9C/%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E3%83%9E%E3%82%A6%E3%82%B9%E3%82%A8%E3%83%9F%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%BF[和訳したデータシート]はとても役に立ちました。
 

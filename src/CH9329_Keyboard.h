@@ -125,7 +125,11 @@ typedef struct
   uint8_t keys[6];
 } KeyReport;
 
+#if defined(FLASHEND) && FLASHEND <= 0x7FF
+class CH9329_Keyboard_ 
+#else
 class CH9329_Keyboard_ : public Print
+#endif
 {
 private:
   KeyReport _keyReport;

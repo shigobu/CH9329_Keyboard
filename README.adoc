@@ -39,12 +39,12 @@ https://www.arduino.cc/reference/en/language/functions/usb/keyboard/
 
 == ATtiny202 (or MCU with small flash) support ==
 ATtiny202のようなフラッシュサイズが2KB以下のマイコンでは、print関数を無効化することでフラッシュ使用量を削減しています。
-これは、`_AVR_FLASH`マクロ使用して自動で判定されます。`_AVR_FLASH`マクロはmegaTinyCoreで使えます。
+これは、`FLASHEND`マクロ使用して自動で判定されます。
 
 *前述の通り、フラッシュサイズが2KB以下の場合は、print関数が使用出来ません。*
 
 For microcontrollers with a flash size of 2KB or less, such as the ATtiny202, the flash usage is reduced by disabling the print function.
-This is automatically determined by using the `_AVR_FLASH` macro. The `_AVR_FLASH` macro can be used with megaTinyCore.
+This is automatically determined by using the `FLASHEND` macro.
 
 *As mentioned above, if the flash size is less than 2KB, the print function cannot be used. *
 

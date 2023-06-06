@@ -125,7 +125,11 @@ typedef struct
   uint8_t keys[6];
 } KeyReport;
 
+#if defined(_AVR_FLASH) && _AVR_FLASH <= 2
+class CH9329_Keyboard_ 
+#else
 class CH9329_Keyboard_ : public Print
+#endif
 {
 private:
   KeyReport _keyReport;

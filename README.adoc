@@ -13,15 +13,22 @@ For more information about the original Keyboard library please visit
 https://www.arduino.cc/reference/en/language/functions/usb/keyboard/
 
 == Usage ==
+
 ....
-Serial.begin(CH9329_DEFAULT_BAUDRATE);
-CH9329_Keyboard.begin(Serial);
+#include "CH9329_Keyboard.h"
+
+void setup() {
+  Serial.begin(CH9329_DEFAULT_BAUDRATE);
+  CH9329_Keyboard.begin(Serial);
+}
 ....
 
 SoftwareSerialも使えます。 +
 SoftwareSerial can also be used.
 
 ....
+#include "CH9329_Keyboard.h"
+
 #include <SoftwareSerial.h>
 const byte rxPin = 2;
 const byte txPin = 3;

@@ -37,29 +37,56 @@ void CH9329_Keyboard_::begin(Stream& stream, const uint8_t *layout)
 	_stream = &stream;
 }
 
+void CH9329_Keyboard_::begin(const uint8_t *layout)
+{
+	_asciimap = layout;
+	_stream = nullptr;
+}
+
 void CH9329_Keyboard_::end(void)
 {
 }
 
+int CH9329_Keyboard_::getReportData(uint8_t *buffer, size_t size)
+{
+	return getReportData(&_keyReport, buffer, size);
+}
+
+int CH9329_Keyboard_::getReportData(KeyReport* keys, uint8_t *buffer, size_t size)
+{
+	if (size < REPORT_DATA_LENGTH) {
+		return 0;
+	}
+
+	buffer[0] = 0x57;
+	buffer[1] = 0xAB;
+	buffer[2] = 0x00;
+	buffer[3] = 0x02;
+	buffer[4] = 0x08;
+	buffer[5] = keys->modifiers;
+	buffer[6] = 0;
+	buffer[7] = keys->keys[0];
+	buffer[8] = keys->keys[1];
+	buffer[9] = keys->keys[2];
+	buffer[10] = keys->keys[3];
+	buffer[11] = keys->keys[4];
+	buffer[12] = keys->keys[5];
+	int sum = 0;
+	for (size_t i = 0; i < 13; i++) {
+		sum += buffer[i];
+	}
+	buffer[13] = (uint8_t)(sum & 0xff);
+	return REPORT_DATA_LENGTH;
+}
+
 void CH9329_Keyboard_::sendReport(KeyReport* keys)
 {
-	uint8_t data[14] = {0x57, 0xAB, 0x00, 0x02, 0x08};
-	data[5] = keys->modifiers;
-	data[6] = 0;
-	data[7] = keys->keys[0];
-	data[8] = keys->keys[1];
-	data[9] = keys->keys[2];
-	data[10] = keys->keys[3];
-	data[11] = keys->keys[4];
-	data[12] = keys->keys[5];
-	int sum = 0;
-	for (size_t i = 0; i < 13; i++)
-	{
-		sum += data[i];
+	if (_stream == nullptr) {
+		return;
 	}
-	data[13] = (uint8_t)(sum & 0xff);
-	
-	_stream->write(data, 14);
+
+	int length = getReportData(keys, _reportData, REPORT_DATA_LENGTH);
+	_stream->write(_reportData, length);
 }
 
 // press() adds the specified key (printing, non-printing, or modifier)

@@ -107,6 +107,8 @@
 //baud rate
 #define CH9329_DEFAULT_BAUDRATE   9600
 
+#define REPORT_DATA_LENGTH    14
+
 // Supported keyboard layouts
 extern const uint8_t KeyboardLayout_de_DE[];
 extern const uint8_t KeyboardLayout_en_US[];
@@ -135,11 +137,15 @@ private:
   KeyReport _keyReport;
   const uint8_t *_asciimap;
   Stream* _stream;
+  uint8_t _reportData[REPORT_DATA_LENGTH];
   void sendReport(KeyReport* keys);
+  int getReportData(KeyReport* keys, uint8_t *buffer, size_t size);
 public:
   CH9329_Keyboard_(void);
   void begin(Stream& stream, const uint8_t *layout = KeyboardLayout_en_US);
+  void begin(const uint8_t *layout = KeyboardLayout_en_US);
   void end(void);
+  int getReportData(uint8_t *buffer, size_t size);
   size_t write(uint8_t k);
   size_t write(const uint8_t *buffer, size_t size);
   size_t press(uint8_t k);

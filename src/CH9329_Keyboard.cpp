@@ -58,6 +58,10 @@ int CH9329_Keyboard_::getReportData(KeyReport* keys, uint8_t *buffer, size_t siz
 		return 0;
 	}
 
+	if (buffer == nullptr) {
+		return 0;
+	}
+
 	buffer[0] = 0x57;
 	buffer[1] = 0xAB;
 	buffer[2] = 0x00;

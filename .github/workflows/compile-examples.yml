@@ -35,7 +35,8 @@ jobs:
             platforms: |
               - name: arduino:avr
             sketch-paths: |
-              - examples
+              examples/KeyboardPassword
+              examples/Serial
           - fqbn: megaTinyCore:megaavr:atxy2:chip=202
             platforms: |
               - source-url: http://drazzy.com/package_drazzy.com_index.json
@@ -43,7 +44,7 @@ jobs:
               - source-path: megaavr
                 name: megaTinyCore:megaavr
             sketch-paths: |
-              - examples
+              examples/ATtiny202example
 
     steps:
       - name: Checkout repository

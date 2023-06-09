@@ -25,7 +25,6 @@ jobs:
 
     env:
       SKETCHES_REPORTS_PATH: sketches-reports
-      platform-name: megaTinyCore:megaavr
 
     strategy:
       fail-fast: false
@@ -37,12 +36,12 @@ jobs:
               - name: arduino:avr
             sketch-paths: |
               - examples
-          - fqbn: ${{ env.platform-name }}:atxy2:chip=202
+          - fqbn: megaTinyCore:megaavr:atxy2:chip=202
             platforms: |
               - source-url: http://drazzy.com/package_drazzy.com_index.json
-                name: ${{ env.platform-name }}
+                name: megaTinyCore:megaavr
               - source-path: megaavr
-                name: ${{ env.platform-name }}
+                name: megaTinyCore:megaavr
             sketch-paths: |
               - examples
 

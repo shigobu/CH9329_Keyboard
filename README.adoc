@@ -66,6 +66,32 @@ For microcontrollers with a flash size of 2KB or less, such as the ATtiny202, th
 This is automatically determined by using the `FLASHEND` macro. +
 *As mentioned above, if the flash size is less than 2KB, the print function cannot be used.*
 
+=== Serial を使わない方法 Without Serial ===
+ATtiny202 でテストしていると、Serial オブジェクトがフラッシュの大部分を占めていることが判明しました。そこで、Serial を使わない方法を用意しました。 +
+While testing with the ATtiny202, I found that the Serial object was taking up the majority of the flash. So I prepared a method that does not use Serial.
+
+`begin` 関数に `Serial` を渡さないオプションを用意しました。
+....
+CH9329_Keyboard.begin();
+....
+こうすると、 `write` 関数と `print` 関数が使えなくなります。その代わり、 `press` `release` `releaseAll` `getReportData` を使用して、UARTへ送信すべきデータを取得します。
+重要なのは、`getReportData` 関数です。これは、`press` `release` `releaseAll` 関数で登録したキー押下情報を、CH9329プロトコルに変換して返します。 +
+「W」キーを押して、離すコードは以下のようになります。
+....
+//global variable
+uint8_t reportData[REPORT_DATA_LENGTH] = {};
+
+//setup or loop
+int length = 0;
+CH9329_Keyboard.press("w");
+length = CH9329_Keyboard.getReportData(reportData, REPORT_DATA_LENGTH);
+USART1_sendChar(reportData, length); //UART send function. This is not included.
+
+CH9329_Keyboard.release("w");
+length = CH9329_Keyboard.getReportData(reportData, REPORT_DATA_LENGTH);
+USART1_sendChar(reportData, length); //UART send function. This is not included.
+....
+
 == Acknowledgements ==
 いちかわ(ICHI) https://twitter.com/atsuyuki1kawa[(Twitter)] さんが公開している  https://sites.google.com/site/ichiworkspace/%E3%83%9B%E3%83%BC%E3%83%A0/%E3%81%BF%E3%82%93%E3%81%AA%E3%81%AE%E3%83%A9%E3%83%9C/%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E3%83%9E%E3%82%A6%E3%82%B9%E3%82%A8%E3%83%9F%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%BF[和訳したデータシート]はとても役に立ちました。
 

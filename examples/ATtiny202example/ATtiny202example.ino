@@ -2,7 +2,7 @@
 
 #define USART0_BAUD_RATE(BAUD_RATE) ((float)(F_CPU * 64 / (16 * (float)BAUD_RATE)) + 0.5)
 
-const int button = 2;
+const int button = PIN_PA1;
 uint8_t reportData[KEY_REPORT_DATA_LENGTH] = {};
 
 void USART0_init(void) {

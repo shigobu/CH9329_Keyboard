@@ -41,8 +41,6 @@ jobs:
             platforms: |
               - source-url: http://drazzy.com/package_drazzy.com_index.json
                 name: megaTinyCore:megaavr
-              - source-path: megaavr
-                name: megaTinyCore:megaavr
             sketch-paths: |
               examples/ATtiny202example
 

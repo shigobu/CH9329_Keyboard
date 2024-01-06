@@ -45,12 +45,19 @@ For more information about the original Keyboard library please visit
 https://www.arduino.cc/reference/en/language/functions/usb/keyboard/
 
 == Installation ==
+最新版は、Arduino IDE のライブラリマネージャーからインストールできます。「CH9329_Keyboard」で検索し、インストールを押してください。 +
+The latest release is available in the Library Manager in the Arduino IDE. Search for "CH9329_Keyboard". Click install.
+
+'''
+手動インストールの方法
+
 . 最新の https://github.com/shigobu/CH9329_Keyboard/releases[Releases] で「Source code(zip)」をクリックして、ソースコードをダウンロードする。
 . Arduino IDE を起動する。
 . 「スケッチ」→「ライブラリをインクルード」→「.ZIP形式のライブラリをインストール...」を選択する。
 . ダウンロードしたzipファイルを選択し「開く」を押す。
 
 '''
+manual installation
 
 . Download the source code by clicking on "Source code(zip)" in the latest https://github.com/shigobu/CH9329_Keyboard/releases[Releases].
 . Start the Arduino IDE.

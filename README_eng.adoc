@@ -7,14 +7,12 @@ image:https://github.com/{repository-owner}/{repository-name}/actions/workflows/
 image:https://github.com/{repository-owner}/{repository-name}/actions/workflows/compile-examples.yml/badge.svg["Compile Examples status", link="https://github.com/{repository-owner}/{repository-name}/actions/workflows/compile-examples.yml"]
 image:https://github.com/{repository-owner}/{repository-name}/actions/workflows/spell-check.yml/badge.svg["Spell Check status", link="https://github.com/{repository-owner}/{repository-name}/actions/workflows/spell-check.yml"]
 
-link:/README_eng.adoc[English]
+This library and the CH9329 chip allows an Arduino board without USB capability to act as a keyboard.
 
-このライブラリとCH9329チップを使用すると、USB機能の無いAruduinoボードをキーボードにすることができます。
-
-詳細は、Arduino公式のドキュメントを参照してください。
+For more information about the original Keyboard library please visit
 https://www.arduino.cc/reference/en/language/functions/usb/keyboard/
 
-== 使い方 ==
+== Usage ==
 
 ....
 #include "CH9329_Keyboard.h"
@@ -25,7 +23,7 @@ void setup() {
 }
 ....
 
-SoftwareSerialも使えます。
+SoftwareSerial can also be used.
 
 ....
 #include "CH9329_Keyboard.h"
@@ -41,36 +39,36 @@ void setup() {
 }
 ....
 
-他、オリジナルのキーボードライブラリとほとんど同じです。
+For more information about the original Keyboard library please visit
 https://www.arduino.cc/reference/en/language/functions/usb/keyboard/
 
-== インストール方法 ==
-最新版は、Arduino IDE のライブラリマネージャーからインストールできます。「CH9329_Keyboard」で検索し、インストールを押してください。
+== Installation ==
+The latest release is available in the Library Manager in the Arduino IDE. Search for "CH9329_Keyboard". Click install.
 
 '''
-手動インストールの方法
+manual installation
 
-. 最新の https://github.com/shigobu/CH9329_Keyboard/releases[Releases] で「Source code(zip)」をクリックして、ソースコードをダウンロードする。
-. Arduino IDE を起動する。
-. 「スケッチ」→「ライブラリをインクルード」→「.ZIP形式のライブラリをインストール...」を選択する。
-. ダウンロードしたzipファイルを選択し「開く」を押す。
+. Download the source code by clicking on "Source code(zip)" in the latest https://github.com/shigobu/CH9329_Keyboard/releases[Releases].
+. Start the Arduino IDE.
+. Select "Sketch" -> "Include Library" -> "Add .ZIP Library...".
+. Select the downloaded zip file and click "Open".
 
+== ATtiny202 (or MCU with small flash) support ==
 
-== ATtiny202 (またはフラッシュサイズの小さいマイコン) サポート ==
-ATtiny202のようなフラッシュサイズが2KB以下のマイコンでは、print関数を無効化することでフラッシュ使用量を削減しています。
-これは、`FLASHEND` マクロ使用して自動で判定されます。 +
-*前述の通り、フラッシュサイズが2KB以下の場合は、print関数が使用出来ません。*
+For microcontrollers with a flash size of 2KB or less, such as the ATtiny202, the flash usage is reduced by disabling the print function.
+This is automatically determined by using the `FLASHEND` macro. +
+*As mentioned above, if the flash size is less than 2KB, the print function cannot be used.*
 
-=== Serial を使わない方法 ===
-ATtiny202 でテストしていると、Serial オブジェクトがフラッシュの大部分を占めていることが判明しました。そこで、Serial を使わない方法を用意しました。
+=== Without Serial ===
+While testing with the ATtiny202, I found that the Serial object was taking up the majority of the flash. So I prepared a method that does not use Serial.
 
 ....
 CH9329_Keyboard.begin();
 ....
 
-こうすると、 `write` 関数と `print` 関数が使えなくなります。その代わり、 `press` `release` `releaseAll` `getReportData` を使用して、UARTへ送信すべきデータを取得します。
-重要なのは、`getReportData` 関数です。これは、`press` `release` `releaseAll` 関数で登録したキー押下情報を、CH9329プロトコルに変換して返します。 +
-「W」キーを押して、離すコードは以下のようになります。
+In this way, the `write` and `print` functions are disabled. Instead, use `press` `release` `releaseAll` `getReportData` to get the data that should be sent to the UART.
+The important part is the `getReportData` function. It converts the key press information registered by the `press` `release` `releaseAll` function into the CH9329 protocol and returns it. +
+The code for pressing and releasing the "W" key is as follows
 
 ....
 //global variable
@@ -80,14 +78,14 @@ uint8_t reportData[REPORT_DATA_LENGTH] = {};
 int length = 0;
 CH9329_Keyboard.press("w");
 length = CH9329_Keyboard.getReportData(reportData, REPORT_DATA_LENGTH);
-USART0_sendValue(reportData, length); //UART送信関数。ライブラリに含まれていません。
+USART0_sendValue(reportData, length); //UART send function. This is not included.
 
 CH9329_Keyboard.release("w");
 length = CH9329_Keyboard.getReportData(reportData, REPORT_DATA_LENGTH);
-USART0_sendValue(reportData, length); //UART送信関数。ライブラリに含まれていません。
+USART0_sendValue(reportData, length); //UART send function. This is not included.
 ....
 
-== 謝辞 ==
+== Acknowledgements ==
 いちかわ(ICHI) https://twitter.com/atsuyuki1kawa[(Twitter)] さんが公開している  https://sites.google.com/site/ichiworkspace/%E3%83%9B%E3%83%BC%E3%83%A0/%E3%81%BF%E3%82%93%E3%81%AA%E3%81%AE%E3%83%A9%E3%83%9C/%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E3%83%9E%E3%82%A6%E3%82%B9%E3%82%A8%E3%83%9F%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%BF[和訳したデータシート]はとても役に立ちました。
 
 == License ==

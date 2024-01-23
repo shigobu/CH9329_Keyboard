@@ -45,6 +45,7 @@ https://www.arduino.cc/reference/en/language/functions/usb/keyboard/
 == Installation ==
 The latest release is available in the Library Manager in the Arduino IDE. Search for "CH9329_Keyboard". Click install.
 
+'''
 manual installation
 
 . Download the source code by clicking on "Source code(zip)" in the latest https://github.com/shigobu/CH9329_Keyboard/releases[Releases].

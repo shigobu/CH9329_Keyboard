@@ -10,6 +10,7 @@ image:https://github.com/{repository-owner}/{repository-name}/actions/workflows/
 link:/README_eng.adoc[English]
 
 このライブラリとCH9329チップを使用すると、USB機能の無いAruduinoボードをキーボードにすることができます。
+シリアル通信モード-モード0に対応しています。
 
 詳細は、Arduino公式のドキュメントを参照してください。
 https://www.arduino.cc/reference/en/language/functions/usb/keyboard/
@@ -86,6 +87,10 @@ CH9329_Keyboard.release("w");
 length = CH9329_Keyboard.getReportData(reportData, REPORT_DATA_LENGTH);
 USART0_sendValue(reportData, length); //UART送信関数。ライブラリに含まれていません。
 ....
+
+== サポートしているマイコンボード ==
+Serial(Streamを継承している)が利用可能なボード全て。 +
+または、シリアル通信ができるボード全て。
 
 == 謝辞 ==
 いちかわ(ICHI) https://twitter.com/atsuyuki1kawa[(Twitter)] さんが公開している  https://sites.google.com/site/ichiworkspace/%E3%83%9B%E3%83%BC%E3%83%A0/%E3%81%BF%E3%82%93%E3%81%AA%E3%81%AE%E3%83%A9%E3%83%9C/%E3%82%AD%E3%83%BC%E3%83%9C%E3%83%BC%E3%83%89%E3%83%9E%E3%82%A6%E3%82%B9%E3%82%A8%E3%83%9F%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%BF[和訳したデータシート]はとても役に立ちました。
